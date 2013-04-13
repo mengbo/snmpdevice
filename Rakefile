@@ -8,5 +8,5 @@ task :build => "#{gemspec.full_name}.gem"
 
 file "#{gemspec.full_name}.gem" => gemspec.files + ["snmpdevice.gemspec"] do
   system "gem build snmpdevice.gemspec"
-  system "gem install snmpdevice-#{SNMPDevice::VERSION}.gem"
+  #system "gem install snmpdevice-#{SNMPDevice::VERSION}.gem"
 end
