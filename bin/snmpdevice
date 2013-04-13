@@ -1,35 +1,36 @@
 #!/usr/bin/env ruby
 
-# == Synopsis
-#
-# snmpdevice: Get snmp infomation from device
-#
-# == Usage
-#
-# snmpdevice [OPTION] device-ip
-#
-# -h, --help:
-#    show help
-#
-# --comunity c, -c c
-#    comunity string, default "public"
-#
-# device-ip: Device ip address
-#
-# == Examples
-#
-# snmpdevice -c comunity 10.0.0.1
-#    Get snmp infomation from 10.0.0.1, with comunity password "comunity"
-#
-# == Author and license
-#    Written by MengBo
-#    Distributed under the same license as Ruby is
-#
+HELP = <<EOF
+== Synopsis
+
+snmpdevice: Get snmp infomation from device
+
+== Usage
+
+snmpdevice [OPTION] device-ip
+
+-h, --help:
+   show help
+
+--comunity c, -c c
+   comunity string, default "public"
+
+device-ip: Device ip address
+
+== Examples
+
+snmpdevice -c comunity 10.0.0.1
+   Get snmp infomation from 10.0.0.1, with comunity password "comunity"
+
+== Author and license
+   Written by MengBo
+   Distributed under the same license as Ruby is
+EOF
+
 
 require 'snmpdevice'
 
 require 'getoptlong'
-require 'rdoc/usage'
 
 opts = GetoptLong.new(
   [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
@@ -38,15 +39,21 @@ opts = GetoptLong.new(
 
 comunity = "public"
 
-opts.each do |opt, arg|
-  case opt
-  when '--help'
-    RDoc::usage
-  when '--comunity'
-    comunity = arg
-  when '--verbose'
-    verbose = true
+begin
+  opts.each do |opt, arg|
+    case opt
+    when '--help'
+      puts HELP
+      exit
+    when '--comunity'
+      comunity = arg
+    end
   end
+rescue #=> err
+  #puts "#{err.class()}: #{err.message}"
+  puts
+  puts HELP
+  exit
 end
 
 if ARGV.length != 1
