@@ -1,3 +1,5 @@
-snmpdevice/Gemfile.lock
+Gemfile.lock
 
 .rvmrc
+.ruby-version
+.ruby-gemset
