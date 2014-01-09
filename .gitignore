@@ -1,4 +1,5 @@
 Gemfile.lock
+.bundle/install.log
 
 .rvmrc
 .ruby-version
