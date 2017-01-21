@@ -1,30 +1,27 @@
-require File.expand_path("../lib/snmpdevice/version", __FILE__)
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'snmpdevice/version'
 
-Gem::Specification.new do |s|
-  s.name        = 'snmpdevice'
-  s.version     = SNMPDevice::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Meng Bo"]
-  s.email       = 'mengbo@lnu.edu.cn'
-  s.homepage    = "https://github.com/mengbo/snmpdevice"
-  s.summary     = "Ruby SNMP tool."
-  s.description = "Ruby SNMP tool, for CISCO/Ruijie/H3C network deivce."
+Gem::Specification.new do |spec|
+  spec.name          = "snmpdevice"
+  spec.version       = SNMPDevice::VERSION
+  spec.authors       = ["Meng Bo"]
+  spec.email         = ["mengbo@lnu.edu.cn"]
 
-  s.required_rubygems_version = ">= 1.3.6"
+  spec.summary       = %q{Ruby SNMP tool.}
+  spec.description   = %q{Ruby SNMP tool, for CISCO/Ruijie/H3C network deivce.}
+  spec.homepage      = "https://github.com/mengbo/snmpdevice"
 
-  # lol - required for validation
-  s.rubyforge_project         = "snmpdevice"
+  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features)/})
+  end
+  spec.bindir        = "exe"
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
 
-  # If you have other dependencies, add them here
-  s.add_dependency "snmp", "~> 1.1"
+  spec.add_dependency "snmp", "~> 1.1"
 
-  # If you need to check in files that aren't .rb files, add them here
-  s.files        = Dir["{lib}/**/*.rb", "bin/*", "shell/*", "*.md"]
-  s.require_path = 'lib'
-
-  # If you need an executable, add it here
-  s.executables = ["snmpdevice"]
-
-  # If you have C extensions, uncomment this line
-  # s.extensions = "ext/extconf.rb"
+  spec.add_development_dependency "bundler", "~> 1.13"
+  spec.add_development_dependency "rake", "~> 10.0"
 end
